@@ -1,4 +1,4 @@
-package am.vtc.userchat.servlet;
+package am.vtc.userchat.servlet.user;
 
 
 import am.vtc.userchat.service.UserService;

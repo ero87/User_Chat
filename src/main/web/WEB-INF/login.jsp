@@ -3,8 +3,6 @@
 <html>
 <head>
     <title>Login</title>
-    <%--    <link rel="stylesheet" href="<c:url value="/static/css/login.css"/>" type="text/css"/>--%>
-    <%--    <style><%@include file="/css/login.css" %></style>--%>
     <!--Bootsrap 4 CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -15,6 +13,8 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/styles.css"/>">
+    <script src="<c:url value="/static/js/jquery.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/static/js/main.js"/>" type="text/javascript"></script>
 
 </head>
 <body>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="/login" method="post">
+                <form id="login-form" action="/login" method="post">
                     <c:if test="${sessionScope.successfully != null}">
                         <span style="color: green">
                             <c:out value="${sessionScope.successfully}"/>
@@ -38,25 +38,30 @@
                         </span>
                         <br>
                     </c:if>
+                    <c:if test="${requestScope.errorEmailPassword != null}">
+                        <p id="wrong-email-pass" style="color: red"><c:out value="${requestScope.errorEmailPassword}"/></p>
+                    </c:if>
+                    <p id="wrong-email-login" hidden="hidden" style="color: red">Wrong Email Format!</p>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" id="email"  class="form-control" name="email"
-                               placeholder="<c:out value="${requestScope.errorEmailPassword != null ? requestScope.errorEmailPassword : 'Email'}"/>">
+                        <input type="text" id="email-input" class="form-control" name="email"
+                               placeholder="<c:out value="${requestScope.errorEmail != null ? requestScope.errorEmail : 'Email'}"/>">
 
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" id="password-input" name="password" class="form-control"
+                               placeholder="Password">
                     </div>
                     <div class="row align-items-center remember">
                         <input type="checkbox">Remember Me
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-right login_btn">
+                        <button onclick="doLogin()" class="btn float-right login_btn">Login</button>
                     </div>
                 </form>
             </div>

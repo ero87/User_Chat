@@ -6,14 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter({"/login","/register"})
+@WebFilter(urlPatterns = {"/login","/register"})
 public class LoginRegisterFilter implements Filter {
-
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest,
@@ -26,10 +20,5 @@ public class LoginRegisterFilter implements Filter {
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
-
     }
 }

@@ -1,4 +1,6 @@
-package am.vtc.userchat.servlet;
+package am.vtc.userchat.servlet.user;
+
+import am.vtc.userchat.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -6,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/logout")
-public class LogoutServlet extends BaseServlet {
+@WebServlet({"/home","/"})
+public class HomeServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("user");
-        resp.sendRedirect("/login");
+        User user = (User) req.getSession().getAttribute("user");
+        System.out.println(user.getImageUrl());
+        req.getRequestDispatcher("WEB-INF/home.jsp").forward(req, resp);
     }
 }

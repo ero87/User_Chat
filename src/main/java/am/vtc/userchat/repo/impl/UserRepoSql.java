@@ -6,6 +6,8 @@ import am.vtc.userchat.repo.UserRepo;
 import am.vtc.userchat.util.DataSource;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepoSql implements UserRepo {
@@ -91,7 +93,32 @@ public class UserRepoSql implements UserRepo {
         return Optional.empty();
     }
 
+    @Override
+    public List<User> fetchAll() throws SQLException {
+        List<User> users = new LinkedList<>();
+        String query = "SELECT * FROM users;";
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                users.add(createFromResultSet(resultSet));
+            }
+        }
+        return users;
+    }
+
     private static User toUser(ResultSet resultSet) throws SQLException{
+        User user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setName(resultSet.getString("name"));
+        user.setSurname(resultSet.getString("surname"));
+        user.setEmail(resultSet.getString("email"));
+        user.setPassword(resultSet.getString("password"));
+        user.setImageUrl(resultSet.getString("image_url"));
+        return user;
+    }
+
+    private User createFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt("id"));
         user.setName(resultSet.getString("name"));

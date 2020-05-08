@@ -10,7 +10,7 @@ public class User {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonProperty
+    @JsonProperty("image_url")
     private String imageUrl;
 
     public int getId() {

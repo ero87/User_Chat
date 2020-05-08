@@ -1,7 +1,8 @@
-package am.vtc.userchat.servlet;
+package am.vtc.userchat.servlet.user;
 
 
 import am.vtc.userchat.model.User;
+import am.vtc.userchat.servlet.RequestValidator;
 import am.vtc.userchat.util.DataValidator;
 import am.vtc.userchat.util.EncryptionUtil;
 

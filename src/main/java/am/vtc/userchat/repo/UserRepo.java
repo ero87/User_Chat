@@ -4,6 +4,7 @@ package am.vtc.userchat.repo;
 import am.vtc.userchat.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepo {
@@ -13,5 +14,6 @@ public interface UserRepo {
     boolean existEmail(String email) throws SQLException;
     String getPasswordByEmail(String email) throws SQLException;
     Optional<User> findByEmailAndPassword(String email, String password) throws SQLException;
+    List<User> fetchAll() throws SQLException;
 
 }
