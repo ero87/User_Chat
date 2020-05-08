@@ -6,7 +6,7 @@ import am.vtc.userchat.service.impl.MessageServiceImpl;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-public abstract class BaseMessageServlet extends HttpServlet {
+abstract class BaseMessageServlet extends HttpServlet {
     protected MessageService messageService;
 
     @Override
